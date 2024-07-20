@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+    background: url("../img/wallpaper.jpg");
+    background-size: 100vw;
+    color: #6c6e6e !important;
+}
+
+.no-select {
+    user-select: none;
+}
+
+.container {
+    width: 500px;
+    height: 400px;
+}
+
+.terminal_toolbar {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    padding: 0 8px;
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: #f8f2f7;
+    border: none;
+    justify-content: center;
+}
+
+.butt {
+    display: flex;
+    align-items: center;
+    left: 15px !important;
+    position: absolute;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-right: 5px;
+    font-size: 8px;
+    height: 12px;
+    width: 12px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 100%;
+}
+
+.btn-color {
+    background: #ee411a;
+}
+
+.btn-green {
+    background-color: rgb(40, 200, 64) !important;
+}
+
+.btn-yellow {
+    background-color: rgb(255, 188, 46) !important;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.butt--exit {
+    background: linear-gradient(#f37458 0%, #de4c12 100%);
+}
+
+.user {
+    color: #6c6e6e;
+    margin-left: 6px;
+    font-size: 14px;
+    line-height: 15px;
+}
+
+.terminal_body {
+    background: #fff;
+    height: calc(100% - 30px);
+    padding-top: 2px;
+    margin-top: -1px;
+    font-size: 12px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.terminal_promt {
+    display: flex;
+}
+
+.terminal_promt span {
+    margin-left: 4px;
+}
+
+.terminal_user {
+    color: #4878c0;
+}
+
+.terminal_cursor {
+    display: block;
+    height: 14px;
+    width: 2px;
+    margin-left: 0px !important;
+    animation: curbl 1200ms linear infinite;
+    color: #4878c0;
+}
+
+@keyframes curbl {
+    0% {
+        background: #8e9193;
+    }
+
+    49% {
+        background: #8e9193;
+    }
+
+    60% {
+        background: transparent;
+    }
+
+    99% {
+        background: transparent;
+    }
+
+    100% {
+        background: #8e9193;
+    }
+}
