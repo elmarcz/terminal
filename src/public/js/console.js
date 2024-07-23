@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     numberOnHistory++;
                     updateTextInput();
                     textField.innerHTML = history[numberOnHistory] || ""; // Mostrar el comando anterior
+                    textWritted = textField.innerHTML
                 }
                 break;
 
@@ -121,11 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     numberOnHistory--;
                     updateTextInput();
                     textField.innerHTML = history[numberOnHistory] || ""; // Mostrar el siguiente comando
+                    textWritted = textField.innerHTML
                 } else if (numberOnHistory === 0) {
                     // Si se está en el primer comando, restablecer el campo de texto
                     numberOnHistory = -1; // Restablecer el índice al estado inicial
                     updateTextInput();
                     textField.innerHTML = ""; // Limpiar la entrada si se está en el primer comando
+                    textWritted = textField.innerHTML
                 }
                 break;
             default:
@@ -171,7 +174,6 @@ document.addEventListener("keydown", (e) => {
 
         // Añadir un enter
         case "Enter":
-            updateTextInput();
             if (textField.innerHTML == "") return;
             numberOnHistory = -1;
 

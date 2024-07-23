@@ -1,4 +1,4 @@
 module.exports = {
-    name: "ls",
+    name: ["ls"],
     description: "A command to see what is in directory"
 }
