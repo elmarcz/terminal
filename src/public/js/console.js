@@ -1,7 +1,8 @@
 // Global variables
 let textElements = document.querySelectorAll(".terminal_promt");
 let textInput = textElements[textElements.length - 1];
-let history = []
+let history = [];
+let numberOnHistory = 0;
 
 let textField = document.querySelector(".text");
 var textWritted = "";
@@ -100,14 +101,35 @@ function updateTextInput() {
 // Se ha presionado una flecha
 document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (e) => {
-        if (
-            [
-                "ArrowLeft",
-                "ArrowRight"
-            ].includes(e.key)
-        ) {
-            //e.preventDefault(); // Evitar el comportamiento predeterminado
-            console.log(`La tecla ${e.key} ha sido ejecutada.`); // Mensaje en consola
+        switch (e.key) {
+            case "ArrowLeft" || "ArrowRight":
+                console.log(`La tecla ${e.key} ha sido ejecutada.`);
+                break
+
+            case "ArrowUp":
+                // Moverse hacia arriba en el historial
+                if (numberOnHistory < history.length - 1) {
+                    numberOnHistory++;
+                    updateTextInput();
+                    textField.innerHTML = history[numberOnHistory] || ""; // Mostrar el comando anterior
+                }
+                break;
+
+            case "ArrowDown":
+                // Moverse hacia abajo en el historial
+                if (numberOnHistory > 0) {
+                    numberOnHistory--;
+                    updateTextInput();
+                    textField.innerHTML = history[numberOnHistory] || ""; // Mostrar el siguiente comando
+                } else if (numberOnHistory === 0) {
+                    // Si se está en el primer comando, restablecer el campo de texto
+                    numberOnHistory = -1; // Restablecer el índice al estado inicial
+                    updateTextInput();
+                    textField.innerHTML = ""; // Limpiar la entrada si se está en el primer comando
+                }
+                break;
+            default:
+                break
         }
     });
 });
@@ -149,6 +171,10 @@ document.addEventListener("keydown", (e) => {
 
         // Añadir un enter
         case "Enter":
+            updateTextInput();
+            if (textField.innerHTML == "") return;
+            numberOnHistory = -1;
+
             function addNewLine() {
                 const terminal_body = document.querySelector(".terminal_body");
 
@@ -266,15 +292,18 @@ document.addEventListener("keydown", (e) => {
                     })
                         .then(response => response.json())
                         .then(data => {
-                            hasAddedANewLine = true;
                             addNewLineResponse(data.message);
-                            addNewLine()
+                            addNewLine();
                         })
                         .catch(error => console.error("Error:", error));
                 } else { addNewLine() }
             }
 
-            response()
+            if (!history.includes(textField.innerHTML)) {
+                history.unshift(textField.innerHTML); //Add textWritted at the beggining of history    
+            }
+
+            response();
             break;
 
         default:
@@ -286,7 +315,6 @@ document.addEventListener("keydown", (e) => {
 
 
 // --- SELECCIONES ---
-
 const keysPressed = { ctrl: false, selected: false };
 
 // Seleccionando
